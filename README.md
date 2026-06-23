@@ -2,8 +2,7 @@
 
 Proyek ini membangun knowledge graph WNBA di Neo4j dan melengkapinya dengan
 pipeline AI: **Text-to-Cypher**, **Graph Analytics**, **Machine Learning pada
-Graph (GDS)**, **LLM Graph Builder**, dan **RAG (Graph-Augmented Retrieval)** —
-memenuhi seluruh komponen wajib **Tier 4**.
+Graph (GDS)**, **LLM Graph Builder**, dan **RAG (Graph-Augmented Retrieval)**.
 
 ## Arsitektur
 
