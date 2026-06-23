@@ -1,0 +1,8 @@
+neo4j>=5.20.0
+graphdatascience>=1.10
+google-generativeai>=0.7.0
+pandas>=2.0.0
+python-dotenv>=1.0.0
+jupyter>=1.0.0
+scikit-learn>=1.4.0
+matplotlib>=3.8.0

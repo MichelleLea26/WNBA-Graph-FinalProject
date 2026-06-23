@@ -1,0 +1,25 @@
+# Environment & secrets
+.env
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Neo4j local artifacts
+*.dump
+neo4j-data/
+data/databases/
+data/transactions/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
