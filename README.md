@@ -1,4 +1,4 @@
-# WNBA Knowledge Graph — Neo4j + GDS + LLM (Groq Llama-3)
+# WNBA Knowledge Graph 
 
 Proyek ini membangun knowledge graph WNBA di Neo4j dan melengkapinya dengan
 pipeline AI: **Text-to-Cypher**, **Graph Analytics**, **Machine Learning pada
@@ -19,6 +19,7 @@ dataset_WNBA.csv
  (Groq LLM → Cypher) (GDS FastRP + (Groq → entitas/    (subgraph retrieval
                      KMeans +      relasi → Neo4j)        + Groq generation)
                      RandomForest)
+```
 
 **Skema graph:**
 
