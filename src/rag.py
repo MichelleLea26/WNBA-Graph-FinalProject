@@ -1,12 +1,5 @@
 """
 rag.py
-Komponen RAG (Graph-Augmented Retrieval) - Tier 4.
-
-Berbeda dari text_to_cypher.py (yang menerjemahkan pertanyaan -> 1 query
-Cypher spesifik), modul ini mengambil SUBGRAPH konteks di sekitar entitas
-yang relevan dengan pertanyaan (multi-hop neighborhood), lalu menyuntikkan
-konteks tersebut ke prompt LLM (Groq) supaya jawaban AI grounded pada data
-graph -> mengurangi halusinasi.
 """
 
 import os
@@ -19,10 +12,8 @@ load_dotenv()
 # Inisialisasi client Groq menggunakan API key dari .env
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# Gunakan model Llama 3 yang super cepat
 MODEL_NAME = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
-# Skema ini sudah otomatis menyesuaikan data lokal Anda (termasuk node Position)
 ENTITY_SEARCH_QUERY = """
 MATCH (n)
 WHERE (n:Player OR n:Team OR n:College OR n:Position)
@@ -87,7 +78,6 @@ def retrieve_subgraph_context(question: str, max_entities: int = 3) -> str:
     if not context_lines:
         return "(Tidak ditemukan entitas relevan di graph untuk pertanyaan ini.)"
 
-    # Dedup & batasi supaya prompt tidak terlalu panjang
     unique_lines = list(dict.fromkeys(context_lines))[:50]
     return "\n".join(unique_lines)
 
@@ -116,14 +106,13 @@ def rag_answer(question: str) -> dict:
             {"role": "user", "content": prompt}
         ],
         model=MODEL_NAME,
-        temperature=0.3 # Suhu rendah agar AI tidak berhalusinasi di luar data graph
+        temperature=0.3 
     )
     
     return {"question": question, "context": context, "answer": response.choices[0].message.content.strip()}
 
 
 if __name__ == "__main__":
-    # Contoh demo RAG untuk pengumpulan screenshot
     contoh = [
         "Apa hubungan antara Paige Bueckers dan Dallas Wings?",
         "Universitas mana saja yang memiliki hubungan (alumni) yang bermain di tim Dallas Wings?"
