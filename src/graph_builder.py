@@ -13,7 +13,6 @@ load_dotenv()
 
 # Inisialisasi Client Groq
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-# Menggunakan model Llama-3, sangat cepat dan cerdas untuk ekstraksi
 MODEL_NAME = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
 EXTRACTION_SYSTEM_PROMPT = """Kamu adalah sistem ekstraksi entitas & relasi untuk membangun
@@ -50,11 +49,10 @@ def extract_graph_from_text(text: str) -> dict:
             {"role": "user", "content": text}
         ],
         model=MODEL_NAME,
-        temperature=0.1, # Rendah agar hasilnya konsisten/deterministik
+        temperature=0.1, 
     )
     
     raw = chat_completion.choices[0].message.content.strip()
-    # Bersihkan jika LLM masih menyelipkan markdown
     raw = raw.replace("```json", "").replace("```", "").strip()
     
     try:
@@ -62,7 +60,6 @@ def extract_graph_from_text(text: str) -> dict:
     except json.JSONDecodeError as e:
         raise ValueError(f"Groq tidak mengembalikan JSON valid:\n{raw}") from e
 
-# Fungsi _simple_upsert_relation dan _simple_upsert_entity tetap sama seperti sebelumnya
 def _simple_upsert_relation(conn, source: str, rel_type: str, target: str):
     safe_rel = "".join(ch for ch in rel_type.upper() if ch.isalnum() or ch == "_")
     query = f"""
