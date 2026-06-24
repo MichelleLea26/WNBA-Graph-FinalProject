@@ -17,19 +17,17 @@ load_dotenv()
 NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "wnba") # Membaca 'wnba' dari .env
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "wnba") 
 
 GRAPH_NAME = "wnbaGraph"
 
 def get_gds() -> GraphDataScience:
-    # Mengikat GDS langsung ke database 'wnba'
     return GraphDataScience(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD), database=NEO4J_DATABASE)
 
 def project_graph(gds: GraphDataScience):
     if gds.graph.exists(GRAPH_NAME)["exists"]:
         gds.graph.get(GRAPH_NAME).drop()
 
-    # Sesuai dengan data di Neo4j Desktop Anda
     graph, _ = gds.graph.project(
         GRAPH_NAME,
         ["Player", "Team", "College", "Position"],
@@ -69,7 +67,6 @@ def run_clustering(gds: GraphDataScience, n_clusters: int = 5) -> pd.DataFrame:
     return df[["name", "cluster"]]
 
 def run_position_classification(gds: GraphDataScience) -> str:
-    # Membaca posisi dari node Position (sesuai data lokal Anda)
     df = gds.run_cypher(
         """
         MATCH (p:Player)-[:PLAYS_POSITION]->(pos:Position)
