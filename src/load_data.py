@@ -1,21 +1,6 @@
 """
 load_data.py
-Memuat dataset_WNBA.csv ke Neo4j dengan skema graph:
-
-    (:Player {name, height, draftYear})
-    (:Team {name})
-    (:College {name})
-    (:Position {name})
-
-    (Player)-[:PLAYS_FOR]->(Team)
-    (Player)-[:ATTENDED]->(College)
-    (Player)-[:PLAYS_POSITION]->(Position)
-
-Skema ini memenuhi syarat "minimal 3 entitas berbeda" (Player, Team,
-College, Position = 4 entitas) dengan >50 node dan relasi bermakna.
-
-Jalankan sekali saja saat setup awal:
-    python src/load_data.py
+Memuat dataset_WNBA.csv ke Neo4j 
 """
 
 import pandas as pd
