@@ -1,6 +1,5 @@
 """
 graph_ml.py
-Komponen "Machine Learning pada Graph" (Tier 2) menggunakan Neo4j GDS.
 """
 
 from graphdatascience import GraphDataScience
