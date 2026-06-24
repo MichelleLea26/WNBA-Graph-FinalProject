@@ -11,10 +11,8 @@ from db import get_connection
 
 load_dotenv()
 
-# Inisialisasi client Groq menggunakan API key dari .env
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# Menggunakan model terbaru yang 100% aktif dan didukung Groq
 MODEL_NAME = "llama-3.1-8b-instant"
 
 GRAPH_SCHEMA = """
